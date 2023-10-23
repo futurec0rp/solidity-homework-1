@@ -1,0 +1,12 @@
+pragma solidity^0.8.0
+contract Time {
+    function getTime(uint256 timestamp) public view returns (uint256) {
+        if (timestamp > block.timestamp) {
+            uint256 passedTime = timestamp - block.timestamp;
+            uint256 futureTime = block.timestamp + passedTime + 4830; // 1 hour, 20 minutes, 30 seconds is 4830 seconds
+            return futureTime;
+        } else {
+            return 0;
+        }
+    }
+}
