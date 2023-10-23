@@ -1,0 +1,22 @@
+pragma solidity ^0.8.0;
+
+contract Rental {
+    address payable public landlord;
+    string public tenantName;
+    uint public tenantAge;
+    string public tenantOccupation;
+
+    event PaymentReceived(address payer, uint amount);
+
+    constructor(string memory _tenantName, uint _tenantAge, string memory _tenantOccupation) {
+        landlord = payable(msg.sender);
+        tenantName = _tenantName;
+        tenantAge = _tenantAge;
+        tenantOccupation = _tenantOccupation;
+    }
+
+    receive() external payable {
+        emit PaymentReceived(msg.sender, msg.value);
+        landlord.transfer(msg.value);
+    }
+}
