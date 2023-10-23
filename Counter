@@ -1,0 +1,28 @@
+pragma solidity ^0.8.0;
+
+contract Counter {
+    uint public count;
+
+    function increment() public {
+        count++;
+    }
+}
+```
+
+Вот контракт "CounterInteraction", который взаимодействует с контрактом "Counter":
+
+```solidity
+pragma solidity ^0.8.0;
+import "./Counter.sol";
+
+contract CounterInteraction {
+    Counter public counter;
+
+    constructor(address _counterAddress) {
+        counter = Counter(_counterAddress);
+    }
+
+    function incrementCounter() public {
+        counter.increment();
+    }
+}
